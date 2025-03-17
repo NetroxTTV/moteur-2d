@@ -1,7 +1,7 @@
 {
     "projects": {
         "Engine": {
-            "additionalDependencies": [ "freetype.lib", "gdi32.lib", "opengl32.lib", "winmm.lib", "sfml-main.lib", "sfml-graphics-s-d.lib", "sfml-window-s-d.lib", "sfml-system-s-d.lib", "%(AdditionalDependencies)" ],
+            "additionalDependencies": [ "freetype.lib", "gdi32.lib", "opengl32.lib", "winmm.lib", "sfml-main-s-d.lib", "sfml-graphics-s-d.lib", "sfml-window-s-d.lib", "sfml-system-s-d.lib", "%(AdditionalDependencies)" ],
             "additionalIncludeDirectories": ["$(SolutionDir)..\\libs\\SFML\\include"],
             "additionalLibraryDirectories": ["$(SolutionDir)..\\libs\\SFML\\lib"],
             "dependencies": [],
@@ -16,7 +16,7 @@
             "window": false
         },
         "Game": {
-            "additionalDependencies": [ "freetype.lib", "gdi32.lib", "opengl32.lib", "winmm.lib", "sfml-main.lib", "sfml-graphics-s-d.lib", "sfml-window-s-d.lib", "sfml-system-s-d.lib", "%(AdditionalDependencies)" ],
+            "additionalDependencies": [ "freetype.lib", "gdi32.lib", "opengl32.lib", "winmm.lib", "sfml-main-s-d.lib", "sfml-graphics-s-d.lib", "sfml-window-s-d.lib", "sfml-system-s-d.lib", "%(AdditionalDependencies)" ],
             "additionalIncludeDirectories": [ "$(SolutionDir)..\\libs\\SFML\\include" ],
             "additionalLibraryDirectories": [ "$(SolutionDir)..\\libs\\SFML\\lib" ],
             "dependencies": [
@@ -32,7 +32,7 @@
             "window": true
         },
         "Render": {
-            "additionalDependencies": [ "freetype.lib", "gdi32.lib", "opengl32.lib", "winmm.lib", "sfml-main.lib", "sfml-graphics-s-d.lib", "sfml-window-s-d.lib", "sfml-system-s-d.lib", "%(AdditionalDependencies)" ],
+            "additionalDependencies": [ "freetype.lib", "gdi32.lib", "opengl32.lib", "winmm.lib", "sfml-main-s-d.lib", "sfml-graphics-s-d.lib", "sfml-window-s-d.lib", "sfml-system-s-d.lib", "%(AdditionalDependencies)" ],
             "additionalIncludeDirectories": [ "$(SolutionDir)..\\libs\\SFML\\include" ],
             "additionalLibraryDirectories": [ "$(SolutionDir)..\\libs\\SFML\\lib" ],
             "dependencies": [],

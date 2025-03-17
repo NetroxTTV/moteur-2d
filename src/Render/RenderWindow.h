@@ -8,6 +8,7 @@ class RenderWindow final : public sf::RenderWindow
 {
 public:
     RenderWindow(std::string title, int width, int height, uint32_t style = sf::Style::Default);
+    void Create(std::string title, int width, int height);
 
     void BeginFrame();
     void Draw(Sprite* sprite);

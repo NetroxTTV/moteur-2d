@@ -2,8 +2,8 @@
 
 #include "Sprite.h"
 
-RenderWindow::RenderWindow(const std::string title, const int width, const int height, uint32_t style)
-: sf::RenderWindow(sf::VideoMode(width, height), title, style)
+RenderWindow::RenderWindow(std::string title, int width, int height, uint32_t style)
+: sf::RenderWindow(sf::VideoMode(sf::Vector2u(width, height)), title, style)
 {}
 
 void RenderWindow::BeginFrame()
