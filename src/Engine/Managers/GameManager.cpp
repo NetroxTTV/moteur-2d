@@ -39,8 +39,10 @@ void GameManager::Run()
 
 void GameManager::HandleInput()
 {
+
+    Engine::GetRenderWindow()
     
-    while (const std::optional<sf::Event> event = Engine::GetRenderWindow()->pollEvent())
+    /*while (const std::optional<sf::Event> event = Engine::GetRenderWindow()->pollEvent())
     {
         if (event->is<sf::Event::Closed>())
         {
@@ -53,7 +55,7 @@ void GameManager::HandleInput()
     {
         IsStopped = true;
         Engine::GetRenderWindow()->close();
-    }
+    }*/
 }
 
 

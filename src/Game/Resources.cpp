@@ -39,5 +39,6 @@ void Resources::CreateSprite()
 
 void Resources::CreateFonts()
 {
-    DEFAULT_FONT = new sf::Font("../../res/Fonts/arial.ttf");
+    DEFAULT_FONT = new sf::Font();
+    DEFAULT_FONT->loadFromFile("../../res/Fonts/arial.ttf");
 }
