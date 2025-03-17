@@ -40,7 +40,8 @@ void GameManager::Run()
 void GameManager::HandleInput()
 {
 
-    Engine::GetRenderWindow()
+    sf::Event event;
+    while(Engine::GetRenderWindow()->pollEvent(event)) { }
     
     /*while (const std::optional<sf::Event> event = Engine::GetRenderWindow()->pollEvent())
     {
