@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Audio/Music.hpp>
+#include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
 #include "Render/Texture.h"

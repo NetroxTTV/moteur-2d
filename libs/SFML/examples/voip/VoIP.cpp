@@ -1,10 +1,18 @@
+
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "Client.hpp"
-#include "Server.hpp"
-
+#include <iomanip>
 #include <iostream>
+#include <cstdlib>
+
+
+////////////////////////////////////////////////////////////
+// Function prototypes
+// (I'm too lazy to put them into separate headers...)
+////////////////////////////////////////////////////////////
+void doClient(unsigned short port);
+void doServer(unsigned short port);
 
 
 ////////////////////////////////////////////////////////////
@@ -19,9 +27,9 @@ int main()
     const unsigned short port = 2435;
 
     // Client or server ?
-    char who = 0;
+    char who;
     std::cout << "Do you want to be a server ('s') or a client ('c')? ";
-    std::cin >> who;
+    std::cin  >> who;
 
     if (who == 's')
     {
@@ -37,4 +45,6 @@ int main()
     // Wait until the user presses 'enter' key
     std::cout << "Press enter to exit..." << std::endl;
     std::cin.ignore(10000, '\n');
+
+    return EXIT_SUCCESS;
 }
