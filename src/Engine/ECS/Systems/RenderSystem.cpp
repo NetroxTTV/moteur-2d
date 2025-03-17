@@ -4,7 +4,6 @@
 #include "Transform.h"
 #include "ECS/ECS.h"
 #include "../Components/SpriteRenderer.h"
-#include "ECS/Components/ui/Image.h"
 #include "Render/RenderWindow.h"
 
 RenderSystem::RenderSystem(RenderWindow* window): window(window) {}
@@ -18,11 +17,6 @@ void RenderSystem::Render(ECS* globalEC)
             SpriteRenderer* renderer = globalEC->GetComponent<SpriteRenderer>(i);
             renderer->Image->SetPosition(renderer->GetEntity()->GetTransform()->position);
             window->Draw(renderer->Image);
-        } else if (globalEC->HasComponent<Image>(i))
-        {
-            Image* renderer = globalEC->GetComponent<Image>(i);
-            renderer->UIImage->SetPosition(renderer->GetEntity()->GetTransform()->position);
-            window->Draw(renderer->UIImage);
         }
     }
 }

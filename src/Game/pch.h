@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/Audio/Music.hpp>
+#include <SFML/System.hpp>
 
 #include "Render/Texture.h"
 #include "Render/Sprite.h"
@@ -11,7 +13,12 @@
 #include <windows.h>
 #include <iostream>
 
+#include "Managers/Keycode.h"
+
 #include "Utils/Debug.h"
 #include "Utils/Profiler.h"
+
+#include <sstream>
+#define CONSOLE_OUTPUT(s) { std::wostringstream os_; os_ << s; OutputDebugStringW(os_.str().c_str());};
 
 #endif

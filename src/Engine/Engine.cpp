@@ -7,6 +7,7 @@
 #include "ECS/Systems/PhysicsSystem.h"
 #include "ECS/Systems/RenderSystem.h"
 #include "Managers/GameManager.h"
+#include "Managers/InputManager.h"
 #include "scripts/ScriptManager.h"
 
 #include "ECS/ECS.h"
@@ -15,7 +16,7 @@
 Engine::Engine() : mGameManager(new GameManager()), mECS(new ECS()), mRenderSystem(nullptr),
                    mPhysicsSystem(new PhysicsSystem()), mCollisionSystem(new CollisionSystem()), mCameraSystem(nullptr),
                    mParticleSystem(nullptr),
-                   mScriptManager(new ScriptManager()),
+                   mScriptManager(new ScriptManager()), mInputManager(new InputManager()),
                    mRenderWindow(nullptr)
 {
 }
@@ -31,6 +32,7 @@ Engine::~Engine()
     delete mCameraSystem;
     delete mParticleSystem;
     delete mScriptManager;
+    delete mInputManager;
 
     delete mRenderWindow;
 }
@@ -88,6 +90,11 @@ ParticleSystem* Engine::GetParticleSystem()
 ScriptManager* Engine::GetScriptManager()
 {
     return instance().mScriptManager;
+}
+
+InputManager* Engine::GetInputManager()
+{
+    return instance().mInputManager;
 }
 
 float Engine::GetDeltaTime()
