@@ -23,6 +23,8 @@ public:
     void OnCollisionExit(Entity* collider, Entity* other);
     void OnTriggerExit(Entity* collider, Entity* other);
     
+    void OnRender(RenderWindow* window);
+    
     void OnFixedUpdate();
     void OnUpdate();
 

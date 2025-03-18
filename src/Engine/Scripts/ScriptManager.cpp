@@ -4,7 +4,7 @@
 #include "Script.h"
 #include "ECS/Entity.h"
 
-ScriptManager::ScriptManager(): mEntityToRemoveCount(0) {}
+ScriptManager::ScriptManager() : mEntityToRemoveCount(0) {}
 
 void ScriptManager::RemoveEntity(int* index)
 {
@@ -56,6 +56,17 @@ void ScriptManager::OnTriggerExit(Entity* collider, Entity* other)
     for (IScript* script : scriptedEntity[collider->GetIndex()])
     {
         script->OnTriggerExit(other);
+    }
+}
+
+void ScriptManager::OnRender(RenderWindow* window)
+{
+    for (auto& idScripts : scriptedEntity)
+    {
+        for (IScript* script : idScripts.second)
+        {
+            script->OnRender(window);
+        }
     }
 }
 

@@ -22,6 +22,11 @@ public:
     }
 
     ////////////////////////////////
+    /////// SHADERS
+
+    //Shader* DEFAULT_SHADER;
+    
+    ////////////////////////////////
     /////// TEXTURES
 
     Texture* DEFAULT_TEXTURE;
@@ -34,5 +39,5 @@ public:
     ////////////////////////////////
     /////// FONTS
 
-    sf::Font* DEFAULT_FONT = new sf::Font();
+    sf::Font* DEFAULT_FONT;
 };

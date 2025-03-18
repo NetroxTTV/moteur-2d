@@ -4,20 +4,14 @@
 
 class Texture;
 
-class Sprite
+class Sprite : public sf::Sprite
 {
 public:
-    Sprite(Texture* sprite);
-    Sprite(sf::Sprite* sprite);
+    Sprite(Texture& sprite);
+    Sprite(sf::Sprite& sprite);
     ~Sprite() = default;
-
-    sf::Sprite* GetSprite();
-
-    void SetPosition(sf::Vector2f& position);
+    
     void SetAlpha(uint8_t alpha);
     
     Sprite* Cut(int x, int y, int width, int height);
-
-private:
-    sf::Sprite* mSprite ;
 };

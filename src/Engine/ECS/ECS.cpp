@@ -110,6 +110,7 @@ void ECS::Update()
 
 void ECS::Draw()
 {
+    Engine::GetScriptManager()->OnRender(Engine::GetRenderWindow());
     Engine::GetRenderSystem()->Render(this);
     Engine::GetParticleSystem()->Render(this);
 }

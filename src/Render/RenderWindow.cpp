@@ -1,6 +1,7 @@
 ﻿#include "RenderWindow.h"
 
 #include "Sprite.h"
+#include "../../ide/Render/Colors.h"
 
 RenderWindow::RenderWindow(std::string title, int width, int height, uint32_t style)
 : sf::RenderWindow(sf::VideoMode(sf::Vector2u(width, height)), title, style)
@@ -8,12 +9,20 @@ RenderWindow::RenderWindow(std::string title, int width, int height, uint32_t st
 
 void RenderWindow::BeginFrame()
 {
-    clear(sf::Color::Black);
+    clear(Colors::blue);
 }
 
 void RenderWindow::Draw(Sprite* sprite)
 {
-    draw(*sprite->GetSprite());
+    draw(*sprite);
+}
+
+void RenderWindow::Draw(Sprite* sprite, Shader* shader)
+{
+    sf::RenderStates state = sf::RenderStates::Default;
+    state.shader = shader;
+    state.texture = &sprite->getTexture();
+    draw(*sprite, state);
 }
 
 void RenderWindow::Draw(const sf::Text* text)

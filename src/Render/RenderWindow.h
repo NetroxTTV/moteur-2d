@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Shader.h"
 #include "Sprite.h"
 
 class RenderWindow final : public sf::RenderWindow
@@ -12,6 +13,7 @@ public:
 
     void BeginFrame();
     void Draw(Sprite* sprite);
+    void Draw(Sprite* sprite, Shader* shader);
     void Draw(const sf::Text* text);
     void EndFrame();
     

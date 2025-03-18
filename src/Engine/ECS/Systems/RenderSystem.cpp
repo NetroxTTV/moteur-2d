@@ -15,8 +15,18 @@ void RenderSystem::Render(ECS* globalEC)
         if (globalEC->HasComponent<SpriteRenderer>(i))
         {
             SpriteRenderer* renderer = globalEC->GetComponent<SpriteRenderer>(i);
-            renderer->Image->SetPosition(renderer->GetEntity()->GetTransform()->position);
-            window->Draw(renderer->Image);
+            TRANSFORM* transform = renderer->GetEntity()->GetTransform();
+            renderer->Image->setPosition(transform->position);
+            renderer->Image->setScale(transform->scale);
+            if (!renderer->RendererShader)
+                window->Draw(renderer->Image);
+            else
+                window->Draw(renderer->Image, renderer->RendererShader);
+        } else if (globalEC->HasComponent<Image>(i))
+        {
+            Image* image = globalEC->GetComponent<Image>(i);
+            image->UIImage->setPosition(cameraTransform->position);
+            window->Draw(image->UIImage);
         }
     }
 }

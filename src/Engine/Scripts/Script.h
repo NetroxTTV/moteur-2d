@@ -19,6 +19,8 @@ struct IScript
     virtual void OnTriggerEnter(Entity* other);
     virtual void OnTriggerStay(Entity* other);
     virtual void OnTriggerExit(Entity* other);
+
+    virtual void OnRender(RenderWindow* window);
     
     virtual void OnRenderDisable();
     virtual void OnDisable();

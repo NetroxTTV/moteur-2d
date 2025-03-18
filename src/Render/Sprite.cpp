@@ -2,31 +2,26 @@
 
 #include "Texture.h"
 
-Sprite::Sprite(Texture* sprite) : mSprite(new sf::Sprite(*sprite->GetTexture()))
+Sprite::Sprite(Texture& texture) : sf::Sprite(texture)
 {
 }
 
-Sprite::Sprite(sf::Sprite* sprite) : mSprite(sprite) {}
-
-sf::Sprite* Sprite::GetSprite()
+Sprite::Sprite(sf::Sprite& sprite) : sf::Sprite(sprite)
 {
-    return mSprite;
-}
-
-void Sprite::SetPosition(sf::Vector2f& position)
-{
-    mSprite->setPosition(position);
+    return;
 }
 
 void Sprite::SetAlpha(uint8_t alpha)
 {
-    mSprite->setColor(sf::Color(255, 255, 255, alpha));
+    sf::Color color = getColor();
+    color.a = alpha;
+    setColor(color);
 }
 
 Sprite* Sprite::Cut(int x, int y, int width, int height)
 {
-    sf::Sprite* part = new sf::Sprite(*mSprite);
-    part->setTextureRect(sf::IntRect(sf::Vector2i(x, y), sf::Vector2i(width, height)));
-    part->scale(sf::Vector2f(1.0f, 1.0f));
+    sf::Sprite part = sf::Sprite(static_cast<sf::Sprite>(*this));
+    part.setTextureRect(sf::IntRect({x,y}, {width,height}));
+    part.scale({1.0f, 1.0f});
     return new Sprite(part);
 }

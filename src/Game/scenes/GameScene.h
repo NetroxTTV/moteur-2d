@@ -3,8 +3,6 @@
 
 class GameScene : public Scene
 {
-
-private:
     void OnEnter() override;
     void OnExit() override {}
     void OnFixedUpdate() override {}

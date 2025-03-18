@@ -21,7 +21,22 @@ void PlayerMovement::OnFixedUpdate()
 
 void PlayerMovement::OnUpdate()
 {
-    //
+    if (isKeyPressed(sf::Keyboard::Key::D))
+    {
+        movement += owner->GetTransform()->right * Engine::GetDeltaTime();
+    }
+    if (isKeyPressed(sf::Keyboard::Key::Q))
+    {
+        movement -= owner->GetTransform()->right * Engine::GetDeltaTime();
+    }
+    if (isKeyPressed(sf::Keyboard::Key::S))
+    {
+        movement += owner->GetTransform()->up * Engine::GetDeltaTime();
+    }
+    if (isKeyPressed(sf::Keyboard::Key::Z))
+    {
+        movement -= owner->GetTransform()->up * Engine::GetDeltaTime();
+    }
 }
 
 void PlayerMovement::OnDisable()

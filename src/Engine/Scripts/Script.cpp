@@ -41,6 +41,10 @@ void IScript::OnTriggerExit(Entity* other)
 {
 }
 
+void IScript::OnRender(RenderWindow* window)
+{
+}
+
 void IScript::OnRenderDisable()
 {
 }

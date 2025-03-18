@@ -21,6 +21,7 @@ void Resources::Initialize()
 
 void Resources::CreateShaders()
 {
+    //DEFAULT_SHADER = new Shader("shaderPath", Shader::Type::Vertex);
 }
 
 void Resources::CreateParticles()
@@ -29,12 +30,12 @@ void Resources::CreateParticles()
 
 void Resources::CreateTextures()
 {
-    DEFAULT_TEXTURE = new Texture("test.png");
+    DEFAULT_TEXTURE = new Texture("perso.png");
 }
 
 void Resources::CreateSprite()
 {
-    DEFAULT_SPRITE = new Sprite(DEFAULT_TEXTURE);
+    DEFAULT_SPRITE = new Sprite(*DEFAULT_TEXTURE);
 }
 
 void Resources::CreateFonts()

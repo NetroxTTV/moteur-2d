@@ -1,17 +1,11 @@
 ﻿#include "Texture.h"
 
-#include <iostream>
-#include <ostream>
+#include "Engine/Utils/Debug.h"
 
-Texture::Texture(std::string path): mTexture(new sf::Texture)
+Texture::Texture(std::string name)
 {
-    if (mTexture->loadFromFile("../../res/Textures/" + path))
+    if (loadFromFile("../../res/Textures/" + name))
     {
-        std::cout << "Successfully loaded " << path << "\n";
+        Debug::Error("La texture " + name + " was not found.");
     }
-}
-
-sf::Texture* Texture::GetTexture()
-{
-    return mTexture;
 }
