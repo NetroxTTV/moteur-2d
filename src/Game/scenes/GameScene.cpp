@@ -10,6 +10,7 @@
 #include "ECS/Components/RigidBody2D.h"
 
 #include "scripts/PlayerMovement.h"
+#include "scripts/MusicScript.h"
 
 void GameScene::OnEnter()
 {
@@ -26,9 +27,12 @@ void GameScene::OnEnter()
     
     ObjectFactory::AttachScript<PlayerMovement>(player);
     
+    Entity* musique = ObjectFactory::CreateEntity<Entity>();
+    ObjectFactory::AttachScript<MusicScript>(player);
+
     Entity* camera = ObjectFactory::CreateEntity<Entity>();
     ObjectFactory::CreateComponent<Camera>(camera);
-    
+
 }
 
 void GameScene::OnUpdate()

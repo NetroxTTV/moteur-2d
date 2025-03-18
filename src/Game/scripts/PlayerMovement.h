@@ -17,5 +17,4 @@ public:
 	const float SECONDS_PER_BEAT = 0.5f;
 	const float TIMING_WINDOW = 0.1f;
 	sf::Clock beatClock;
-	sf::Music music;
 };
