@@ -7,10 +7,12 @@ class Sprite;
 
 class SpriteSheet
 {
-    Sprite* spriteSheet;
     std::vector<Sprite*> sprites;
+
 public:
+    Sprite* spriteSheet;
     SpriteSheet(Sprite* sprite);
     void Extract(int startX, int startY, int singleWidth, int singleHeight, int width = 1, int height = 1);
     Sprite* GetSprite(int index);
+    std::vector<Sprite*> GetSprites() const;
 };

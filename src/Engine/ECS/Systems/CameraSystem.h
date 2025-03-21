@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+class Camera;
 class RenderWindow;
 class ECS;
 
@@ -11,12 +12,12 @@ public:
     ~CameraSystem() = default;
 
     void SetActiveCamera(int activeCamera);
-    TRANSFORM* GetActiveCamera();
+    Camera* GetActiveCamera();
     
     void Update(ECS* globalEC);
 
 private:
     int mCurrentDisplayedCamera;
-    TRANSFORM* mTransformCamera;
+    Camera* mCurrentCamera;
     RenderWindow* mWindow;
 };

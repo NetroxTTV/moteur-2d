@@ -8,7 +8,7 @@
 #include "Render/RenderWindow.h"
 
 CameraSystem::CameraSystem(RenderWindow* window)
-: mCurrentDisplayedCamera(0), mTransformCamera(nullptr),
+: mCurrentDisplayedCamera(0), mCurrentCamera(nullptr),
                                                    mWindow(window)
 {
 }
@@ -18,9 +18,9 @@ void CameraSystem::SetActiveCamera(int activeCamera)
     mCurrentDisplayedCamera = activeCamera;
 }
 
-TRANSFORM* CameraSystem::GetActiveCamera()
+Camera* CameraSystem::GetActiveCamera()
 {
-    return mTransformCamera;
+    return mCurrentCamera;
 }
 
 void CameraSystem::Update(ECS* globalEC)
@@ -34,8 +34,9 @@ void CameraSystem::Update(ECS* globalEC)
         if (camera->DisplayScreen != mCurrentDisplayedCamera) continue;
         TRANSFORM* transform = camera->GetEntity()->GetTransform();
         sf::View view = sf::View(sf::FloatRect(transform->position, sf::Vector2f(1600, 900)));
+        view.zoom(camera->ZoomFactor);
         mWindow->setView(view);
-        mTransformCamera = transform;
+        mCurrentCamera = camera;
         foundCamera = true;
         break;
     }

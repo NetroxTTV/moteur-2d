@@ -20,8 +20,8 @@ void Sprite::SetAlpha(uint8_t alpha)
 
 Sprite* Sprite::Cut(int x, int y, int width, int height)
 {
-    sf::Sprite part = sf::Sprite(static_cast<sf::Sprite>(*this));
-    part.setTextureRect(sf::IntRect({x,y}, {width,height}));
-    part.scale({1.0f, 1.0f});
-    return new Sprite(part);
+    Sprite* part = new Sprite(*this);
+    part->setTextureRect(sf::IntRect({x,y}, {width,height}));
+    part->scale({1.0f, 1.0f});
+    return part;
 }

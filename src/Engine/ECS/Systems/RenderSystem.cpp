@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "ECS/ECS.h"
 #include "../Components/SpriteRenderer.h"
+#include "ECS/Components/Camera.h"
 #include "ECS/Components/ui/Image.h"
 #include "Render/RenderWindow.h"
 
@@ -12,7 +13,7 @@ RenderSystem::RenderSystem(RenderWindow* window): window(window) {}
 
 void RenderSystem::Render(ECS* globalEC)
 {
-    TRANSFORM* cameraTransform = Engine::GetCameraSystem()->GetActiveCamera();
+    TRANSFORM* cameraTransform = Engine::GetCameraSystem()->GetActiveCamera()->GetEntity()->GetTransform();
     for (int i = 0; i < globalEC->mEntityCount; i++)
     {
         if (globalEC->HasComponent<SpriteRenderer>(i))

@@ -3,6 +3,8 @@
 #include "scripts/Script.h"
 #include <set>
 
+class SpriteSheet;
+
 struct Tile
 {
     std::string tileName;
@@ -16,6 +18,7 @@ class TilemapEditor : public IScript
 
     int currentTileIndex = 0;
     std::vector<Tile> tileMap;
+    SpriteSheet* spriteSheet ;
 
     std::vector<Tile> mTiles;
     std::set<int> mUsedTile;
@@ -33,7 +36,7 @@ class TilemapEditor : public IScript
 
     int mapSize = 5000;
     int halfMapSize = mapSize/2;
-    int tileSize = 50;
+    int tileSize = 16;
     int tilePerRow = mapSize/tileSize;
     int totalTile = tilePerRow*tilePerRow;
 

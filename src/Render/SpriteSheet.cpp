@@ -31,3 +31,8 @@ Sprite* SpriteSheet::GetSprite(int index)
 {
     return sprites[index];
 }
+
+std::vector<Sprite*> SpriteSheet::GetSprites() const
+{
+    return sprites;
+}

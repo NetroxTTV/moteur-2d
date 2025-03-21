@@ -22,6 +22,8 @@ public:
     static RenderWindow* GetRenderWindow();
     
     static GameManager* GetGameManager();
+
+    static CameraSystem* GetCameraSystem();
     
     static float GetDeltaTime();
 
@@ -34,7 +36,6 @@ private:
 
     static ECS* GetECS();
     static RenderSystem* GetRenderSystem();
-    static CameraSystem* GetCameraSystem();
     static PhysicsSystem* GetPhysicsSystem();
     static CollisionSystem* GetCollisionSystem();
     static ParticleSystem* GetParticleSystem();

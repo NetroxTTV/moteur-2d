@@ -4,8 +4,11 @@
 #include "Transform.h"
 
 #include "Resources.h"
+#include "SpriteSheet.h"
+#include "ECS/Components/Camera.h"
+#include "ECS/Systems/CameraSystem.h"
 
-TilemapEditor::TilemapEditor() : mSelector({50, 50}), mTiles(), mOffset({0, 0}) { }
+TilemapEditor::TilemapEditor() : mSelector({16, 16}), mTiles(), mOffset({0, 0}) { }
 
 void TilemapEditor::OnStart()
 {
@@ -18,6 +21,9 @@ void TilemapEditor::OnStart()
     mSelector.setFillColor(sf::Color::Red);
 
     Sprite* sprite = new Sprite(*Resources::instance().SPRITE_SHEET);
+    spriteSheet = new SpriteSheet(sprite);
+    
+    spriteSheet->Extract(0, 16, 16, 16, 480, 480);
 
     for (int x = 0; x <= tilePerRow; x++) {
         int tileX = x * tileSize;
@@ -96,14 +102,14 @@ void TilemapEditor::OnUpdate()
     }
 
     
-    if (isKeyPressed(sf::Keyboard::Key::Left))
+    if (isKeyPressed(sf::Keyboard::Key::Subtract))
     {
-        
+        Engine::GetCameraSystem()->GetActiveCamera()->ZoomFactor += 1.0f * Engine::GetDeltaTime();
     }
 
-    if (isKeyPressed(sf::Keyboard::Key::Right))
+    if (isKeyPressed(sf::Keyboard::Key::Add))
     {
-        
+        Engine::GetCameraSystem()->GetActiveCamera()->ZoomFactor -= 1.0f * Engine::GetDeltaTime();
     }
     
 }
@@ -118,8 +124,12 @@ void TilemapEditor::OnRender(RenderWindow* window)
     window->draw(mGridVertices);
 
     Debug::Log("Tile number " + std::to_string(mTiles.size()));
-    for (Tile tile : mTiles)
+    int i = 0;
+    for (Sprite* sprite : spriteSheet->GetSprites())
     {
+        i++;
+        sprite->setPosition({20.0f*i, 850.0f});
+        window->Draw(sprite);
     }
     
 }

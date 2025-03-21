@@ -10,6 +10,7 @@ public:
     ~Camera() override = default;
 
     int DisplayScreen;
+    float ZoomFactor = 1.0f;
     
     int GetBitmask() override;
 };

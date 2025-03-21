@@ -31,7 +31,7 @@ void Resources::CreateParticles()
 void Resources::CreateTextures()
 {
     DEFAULT_TEXTURE = new Texture("perso.png");
-    SPRITE_SHEET = new Texture("../../res/Tiles/tileset.png", true);
+    SPRITE_SHEET = new Texture("../../res/Tiles/tileset.png", false);
 }
 
 void Resources::CreateSprite()
