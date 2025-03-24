@@ -1,5 +1,6 @@
 #pragma once
 #include "scripts/Script.h"
+#include "KeyCounter.h"
 
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/Music.hpp>
@@ -67,7 +68,7 @@ private:
     float SECONDS_PER_BEAT = 60.0f / BPM;
     const float TIMING_WINDOW = 0.15f;
     const float FALL_SPEED = 100.0f;
-	const float AR = 8.0f;
+	const float AR = 10.0f;
     bool musicStarted;
     bool sKeyPressed = false;
     bool dKeyPressed = false;
@@ -89,9 +90,19 @@ private:
 	sf::Text BPMText;
     sf::Text MissCount;
 
+    sf::Text fullComboText;
+    bool fullCombo = false;
+
     int combo = 0;
     int maxCombo = 0;
 
 	MUSICSTATE mState;
 	std::map<int, BeatMapData*> musicList;
+
+    sf::Clock outlineTimer;
+    bool outlineActive = false;
+    const float outlineDuration = 0.15f;
+
+	KeyCounter key1;
+	KeyCounter key2;
 };

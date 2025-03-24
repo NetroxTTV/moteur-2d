@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "MusicScript.h"
+#include "KeyCounter.h"
 #include <fstream>
 #include <sstream>
 
@@ -7,9 +8,11 @@ MusicScript::MusicScript() :
     comboText(*Resources::instance().DEFAULT_FONT), 
     maxComboText(*Resources::instance().DEFAULT_FONT), 
     BPMText(*Resources::instance().DEFAULT_FONT), 
-    MissCount(*Resources::instance().DEFAULT_FONT)
+    MissCount(*Resources::instance().DEFAULT_FONT),
+	fullComboText(*Resources::instance().DEFAULT_FONT),
+    key1("key 1", sf::Vector2f(100, 100), *Resources::instance().DEFAULT_FONT),
+    key2("key 2", sf::Vector2f(100, 200), *Resources::instance().DEFAULT_FONT)
 {}
-
 
 void MusicScript::SetupTexts()
 {
@@ -26,6 +29,11 @@ void MusicScript::SetupTexts()
     MissCount.setCharacterSize(30);
     MissCount.setFillColor(sf::Color::Red);
     MissCount.setPosition(sf::Vector2f(50, 275));
+    fullComboText.setFont(*Resources::instance().DEFAULT_FONT);
+    fullComboText.setCharacterSize(40);
+    fullComboText.setFillColor(sf::Color(255, 215, 0));
+    fullComboText.setString("FULL COMBO!");
+    fullComboText.setPosition(sf::Vector2f(700.f, 50.f));
 }
 
 void MusicScript::SetHitAreas()
@@ -86,6 +94,7 @@ void MusicScript::PlayBeatmap(int key)
         return;
     }
 
+    music.setVolume(10);
 	LoadNotesFromFile(musicList[key]->beatmapFile);
     BPM = musicList[key]->bpm;
 
@@ -100,7 +109,7 @@ void MusicScript::OnUpdate()
 {
     if (mState == MusicScript::MUSICSTATE::PLAYING) {
         float currentTime = beatClock.getElapsedTime().asSeconds();
-        float miniOffset = 20.f;
+        float miniOffset = 40.f;
 
         if (!musicStarted)
         {
@@ -123,7 +132,14 @@ void MusicScript::OnUpdate()
         static sf::Clock frameClock;
         float deltaTime = frameClock.restart().asSeconds();
 
-        int noteCounter = 0;
+        static float previousNoteTime = -1.f;
+        static bool useRed = true;
+
+        bool sKeyNow = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S);
+        bool dKeyNow = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D);
+
+        key1.update(deltaTime, sKeyPressed);
+        key2.update(deltaTime, dKeyPressed);
 
         while (!noteDataList.empty() && noteDataList.front().time <= currentTime)
         {
@@ -132,21 +148,25 @@ void MusicScript::OnUpdate()
 
             BeatCircle newCircle;
             newCircle.shape = sf::CircleShape(22.f);
-
-            switch ((noteCounter / 5) % 5)
-            {
-            case 0: newCircle.shape.setFillColor(sf::Color::White); break;
-            case 1: newCircle.shape.setFillColor(sf::Color::Red); break;
-            case 2: newCircle.shape.setFillColor(sf::Color::Green); break;
-            case 3: newCircle.shape.setFillColor(sf::Color::Blue); break;
-            case 4: newCircle.shape.setFillColor(sf::Color::Yellow); break;
-            }
-
             newCircle.shape.setPosition(sf::Vector2f(1540.f / 2, 0.f));
             newCircle.spawnTime = note.time;
 
+            if (previousNoteTime >= 0.f)
+            {
+                float timeDiff = note.time - previousNoteTime;
+                if (timeDiff > 0.15f) 
+                {
+                    useRed = !useRed; 
+                }
+            }
+
+            if (useRed)
+                newCircle.shape.setFillColor(sf::Color::Red);
+            else
+                newCircle.shape.setFillColor(sf::Color::Blue);
+
+            previousNoteTime = note.time;
             fallingCircles.push_back(newCircle);
-            noteCounter++;
         }
 
 
@@ -164,9 +184,6 @@ void MusicScript::OnUpdate()
                 break;
             }
         }
-
-        bool sKeyNow = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S);
-        bool dKeyNow = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D);
 
         if ((sKeyNow && !sKeyPressed) || (dKeyNow && !dKeyPressed))
         {
@@ -218,6 +235,11 @@ void MusicScript::OnUpdate()
             }
         }
 
+        if (outlineActive && outlineTimer.getElapsedTime().asSeconds() > outlineDuration) {
+            hitCircle.setOutlineThickness(0.f);
+            outlineActive = false;
+        }
+
         if (!sKeyNow) sKeyPressed = false;
         if (!dKeyNow) dKeyPressed = false;
     }
@@ -238,11 +260,17 @@ void MusicScript::OnRender(RenderWindow* window)
 	window->draw(hitCircle);
 	window->draw(BPMText);
 	window->draw(MissCount);
+	key1.draw(*window);
+	key2.draw(*window);
+
+    if (fullCombo)
+        window->draw(fullComboText);
 
     for (const auto& beatCircle : fallingCircles)
     {
         window->draw(beatCircle.shape);
     }
+
     ShowCombo(*window);
 }
 
@@ -260,6 +288,15 @@ void MusicScript::IncreaseCombo() {
     if (combo > maxCombo) {
         maxCombo = combo;
     }
+
+    if (!fullCombo && combo == noteDataList.size() + fallingCircles.size()) {
+        fullCombo = true;
+    }
+
+    hitCircle.setOutlineThickness(8.f);
+    hitCircle.setOutlineColor(sf::Color(255, 255, 255, 128));
+    outlineTimer.restart();
+    outlineActive = true;
 }
 
 void MusicScript::ResetCombo() {
@@ -268,4 +305,9 @@ void MusicScript::ResetCombo() {
 
 void MusicScript::Missed() {
     Misses++;
+
+    hitCircle.setOutlineThickness(8.f);
+    hitCircle.setOutlineColor(sf::Color::Red);
+    outlineTimer.restart();
+    outlineActive = true;
 }
